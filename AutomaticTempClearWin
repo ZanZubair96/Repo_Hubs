@@ -1,0 +1,9 @@
+1. Open Notepad and type in the following:
+
+rd %temp% /s /q
+
+md %temp%
+
+2. Now, save the file exactly as the path below:
+
+%appdata%\microsoft\windows\start menu\programs\startup\cleantemp.bat
