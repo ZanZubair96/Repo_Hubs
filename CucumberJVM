@@ -1,0 +1,219 @@
+Topics for Cucumber JVM: 
+•	Introduction or Why Cucumber.
+•	Prerequisite.
+•	What is BDD.
+•	What is Gherkin.
+•	Installation.
+•	Writing Feature File.
+•	Implementation Steps.
+•	Hooks.
+•	Tags.
+•	Cucumber Options.
+•	Cucumber Runner Class.
+•	Running Cucumber.
+•	parallel execution in Cucumber.
+•	Page Object.
+•	New Features.
+•	Cucumber Assertions.
+•	Parameters in Cucumber.
+•	Reporting in Cucumber.
+•	Dependency Injection.
+•	Limitation in Cucumber JVM
+
+Introduction: 
+Cucumber is an open-source tool that supports the Behavior Driven Development (BDD) architecture to write acceptance tests for application under test. It enables software teams to collaborate in a way that bridges the gap between business and technical employees, allowing them to do functional validation in a way that is both readable and understandable.
+Cucumber-JVM is the official Java implementation. Every Gherkin step is "glued" to a step definition method, which executes the step. The English text of a step is bound using annotations and regular expressions. Cucumber-JVM is compatible with a variety of testing applications. Anything that can be done in Java can be done with Cucumber-JVM. Cucumber-JVM is ideal for black-box, unit functional testing.
+
+
+
+
+Prerequisite:
+1.	BDD and Gherkin
+2.	JDK
+3.	Test automation (like JUnit and TestNG)
+4.	Build process (Maven)
+5.	IDE (Intellij preferred)
+
+What is BDD:
+BDD (Behaviour-Driven Development) is a set of development approaches targeted at making software development more efficient. It simulates how an application should act from the user's perspective. The main goal of BDD testing is to encourage collaboration among stakeholders like as developers, testers, product managers, and business analysts. Cucumber-JVM is the framework that enables BDD.
+BDD guarantees that everyone is kept informed from the start and throughout the process, resulting in better communication overall.
+BDD is explained in layman's terms. Everyone has significant insight into the project's development by adopting a basic language that is understood by everybody.
+
+What is Gherkin and its Syntax:
+Gherkin is a business-friendly test automation and documentation language. Cucumber understands it, and the two work together as a Behavior Driven Development tool.
+The fundamental structure of a Cucumber feature file in Gherkin will be demonstrated in this example. The basic syntax of feature files includes various keywords.
+The primary keywords are:
+•	Feature.
+•	Rule (as of Gherkin 6)
+•	Scenario.
+•	Given, When, Then.
+•	Background.
+•	Scenario Outline.
+•	Examples.
+Feature: this keyword symbolizes that what follows is a basic description or name of the feature being tested or documented.
+Rule: this keyword is used to express a single business rule that should be followed. It adds to the information about a feature. Several scenarios that relate to this business rule are grouped together by a rule. A rule should include one or more examples that demonstrate the rule in question.
+Scenario: This term denotes the name or a brief description of the scenario that will be used to test the functionality.
+Given: this keyword denotes a specific step, or precondition that must be met before proceeding. In the Arrange, Act, Assert paradigm, Given represents "Arrange".
+When: this term is used, it refers to a when step or the behaviour that is being claimed against. In the Arrange, Act, Assert paradigm, When represents "Act".
+Then: this term denotes a then step, or the step in which the outcome of a behaviour is validated. In the Arrange, Act, Assert paradigm, Then represents "Assert".
+To be recognized by the Gherkin parser, all keywords must be on a new line and must be the first word on that line. Following the terms Feature and Scenario, there must be a colon, as seen in the sample below. There is no need for a colon in Given, When, and Then.
+Background: Occasionally, you'll find yourself repeating the identical Given steps throughout a Feature's situations. Because it's repeated in every scenario, it's safe to assume that those procedures aren't necessary to define the situations; they're just details. By collecting such Given steps in a Background section, you may essentially shift them to the Background.
+A Background helps you to give the situations that follow it some context. It can have one or more Given steps, which are executed before to each scenario but after any Before hooks.
+Scenario Outline: You may use the Scenario Outline keyword to run the same Scenario several times with different values.
+Examples: A section called Examples must be included in a Scenario Outline. Its stages are viewed as a template that is never executed in its entirety. Instead, for each row in the Examples section under it, the Scenario Outline is executed once (not counting the first header row).
+
+Installation:
+(Note: Make sure that you have installed Java and Maven - version 3.3.1 or higher)
+Step-1: Install the cucumber plugin in Intellij
+
+The IntelliJ IDEA Cucumber plugins make it easy to deal with Gherkin feature files in an IntelliJ project that uses the Cucumber framework. There are plugins available for Java, Scala, and Groovy.
+Cucumber for Java IntelliJ plugin includes Gherkin step glue generation for unimplemented steps, Gherkin step code completion, Step-to-glue method code hopping, Gherkin syntax highlighting in ".feature" files matching step regex, and other useful features for Cucumber development.
+•	“File   Settings  Plugins  Marketplace  Search for Cucumber for Java” click on install and then restart the Intellij.
+(You may validate cucumber installation after installing the plugin by producing a file with the suffix “.feature")
+Step-2: Add the maven dependency
+Add the following dependency to your pom.xml to build the step definitions:
+<dependency>
+    <groupId>io.cucumber</groupId>
+    <artifactId>cucumber-java</artifactId>
+    <version>6.9.1</version>
+    <scope>test</scope>
+</dependency>
+
+
+Feature File:
+Gherkin feature files are text files that contain Gherkin behavior scenarios. They use the “.feature” extension, they belong in src/test/resources in a Maven project since they are not Java source files. They should be structured into a logical packaging structure as well.
+Feature: Codoid Cucumber JVM Blog documentation
+
+  Scenario: User visit the Codoid official page
+    When I Navigate to the Codoid page
+    Then I should see the official page of Codoid
+
+Step-Definitions:
+Step definition classes are Java classes that include Gherkin step implementation methods. Step def classes have variables, constructors, and methods much like standard Java classes. Regular expressions are used to "glue" steps to methods. 
+Steps from any step definition class in the project can be used in feature file situations. Step definitions should be placed in packages under src/test/java in a Maven project, and their class names should end in "Steps."
+There are various modes for building the Step definition class file: one is to generate the steps file manually, and the other is to use an Intellij shortcut. 
+•	Through Intellij Shortcut:
+•	Place the caret at a step in your .feature file and press Alt+Enter.
+The list of suggested intention actions opens.
+•	Select Create step definition to create a definition only for one step, or select Create all step definitions to add definitions for all steps in a scenario.
+•	If your project already has definition files, the IDE will offer you to choose which one you wish to add the additional step definitions to. You have the option of selecting an existing file or creating a new one.
+•	A window will appear if you want to create a new step definition file. Choose a file name, a type (Java), and a location for the new file. Files containing step definitions should be kept in a separate package. It's possible that leaving them in the default package will result in an error.
+
+•	Manually creating the Step definition file:
+            
+•	Create the package under the src/java/<PACKAGE_NAME>,
+ for example; “src/java/stepDefinitions”.
+•	Add the step definition file under the src/java/<PACKAGE_NAME>, 
+for example; “src/java/stepDefinitions/CodoidSteps”.
+
+package stepDefinitions;
+
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class CodoidSteps {
+
+    @When("I Navigate to the Codoid page")
+    public void iNavigateToTheCodoidPage() {
+        // Steps to execute
+    }
+
+    @Then("I should see the official page of Codoid")
+    public void iShouldSeeTheOfficialPageOfCodoid() {
+        //Steps to execute
+    }
+}
+
+•	Do the following to ensure that the step definition file is being created in the same order as our feature file. Ascertain that the file containing step definitions is in a separate package. You won't be able to utilize navigation otherwise.
+
+•	Keep Ctrl pressed when hovering the mouse pointer over a step in a .feature file. Click it when it turns into a link to get to the step definition. (or) Place your cursor on a step and choose Navigate | Declaration or Usages from the main menu, or just press Ctrl+B.
+
+
+
+Hooks:
+Hooks, which are chunks of code that execute before or after each scenario, are supported by Cucumber. Using the methods @Before and @After, you may specify them wherever in your project or step definition levels.
+Cucumber Hooks help us manage the coding workflow and decrease code repetition. We may call it an invisible phase that enables us to carry out our scenarios or testing. 
+@Before - Before hooks execute before each scenario's initial step. Some of the use cases of @Before hooks are as follows:
+•	The most typical use case is to initialize a web driver. Before starting the test, we must first initialize the driver.
+
+•	Establish database connections: At the start of the test, the application may request access to test data. 
+
+•	To set browser cookies: The programmer may require the setting of cookies at times in order to fulfil a functioning aim.
+
+
+•	To set up test data: At the start of the test, the application may demand access to test data.
+
+@After - Even if steps are unsuccessful, undefined, pending, or skipped, @After hooks run after the last step of each scenario. This is a widely used steps for tasks that must be completed after the original scenario has been run.
+•	Quit the web driver: This is the most usual method. To make testing independent, we're expected to terminate the browser after each test.
+
+•	Terminate DB connections: If the DB connection was created at the beginning of the test, it is best to terminate it at the conclusion.
+
+•	To delete the test data/browser cookies, follow these steps: We have cleanup activity here since the @After hook runs at the conclusion of each test.
+
+•	Log out of the application: Logging out of the application is critical for making testing self-contained.
+
+•	Capture screenshots for fail/pass scenarios: To ensure that the test runs properly, we must always take a screenshot in the event of a failure.
+
+
+Example: 
+@Before
+public void initDriver() {
+    System.out.println("Open browser");
+    WebDriverManager.chromedriver().setup();
+    base.driver = new ChromeDriver();
+    base.driver.manage().window().maximize();
+    base.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+}
+
+
+@After
+public void teardown() {
+    System.out.println("Close browser");
+    base.driver.quit();
+}
+
+
+Execution Order: Before and After hooks are executed for each scenario.
+ 
+
+
+
+Set the Priority in Cucumber Hooks:
+•	Cucumber runs Hooks in a specific sequence, however there is a method to modify that order according on the test's requirements.
+
+•	@Before(order = int): This runs in increment order, means value 0 would run first and 1 would be after 0
+
+•	@After(order = int): This runs in decrements order, which means the opposite of @Before. Value 1 would run first and 0 would be after 1.
+
+Example:
+@Before(order = 0)
+public void initDriver() {
+    System.out.println("Open browser");
+    WebDriverManager.chromedriver().setup();
+    base.driver = new ChromeDriver();
+    base.driver.manage().window().maximize();
+    base.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+}
+
+@Before(order = 1)
+public void maximizeWindow() {
+    System.out.println("Maximize window");
+    base.driver.manage().window().maximize();
+}
+
+Execution Order of Hooks:
+ 
+Hooks Tagging:
+•	In the last part, we discussed how hooks are run before and after each scenario. The only difference between tagged hooks and regular hooks is that they are run before and after the given tag.
+
+•	If multiple situations need distinct requirements, then various hooks are required for each scenario. If we have two distinct tags, say smoke and regression, and we want to do various actions based on the tag, we may use tagged hooks to do so.
+
+•	Two instances are labelled with @Smoke and one with @Regression in the feature file below.
+
+Example: 
+@After("@Regression,@Smoke")
+public void tearDown() {
+    System.out.println("Close browser");
+    base.driver.quit();
+}
+
