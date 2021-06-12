@@ -1,0 +1,24 @@
+
+Why we need Lambda in Java:
+ 
+   Problem
+	>> Parallel Processing to improve application 
+performance is not there.
+
+so in Java 1.8, they introduced Lambda, Streams, 
+functional interface
+
+
+Lambda Expression: its a Anonymous function
+ >> No method name
+ >> Parameters
+ >> Method Body (Multiple statement)
+ >> Return types
+
+Syntax:
+
+(parameters) -> Expression
+
+(parameters) -> {... Multiple statements}
+
+Note: lambda needs Functional Interface
