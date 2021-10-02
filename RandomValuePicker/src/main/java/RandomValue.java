@@ -8,16 +8,14 @@ public class RandomValue {
     public static void main(String[] args) {
 
         List<String> list = new ArrayList<>();
-        list.add("Jafar Ali");
-        list.add("Rajadurai");
+        list.add("Jana");
         list.add("Jaya Kumar");
-        list.add("Anu Priya");
-        list.add("Kesavan");
-        list.add("Pavithra");
-        list.add("Dinesh");
-        list.add("Muralidharan");
-        list.add("Uma");
-        list.add("Srinath");
+//        list.add("Anu Priya");
+//        list.add("Pavithra");
+//        list.add("Dinesh");
+        list.add("Rajadurai");
+        list.add("Umamageshwari");
+
 
         getRandomItem(list);
     }
@@ -25,6 +23,6 @@ public class RandomValue {
     private static void getRandomItem(List<String> list) {
         int index = random.nextInt(list.size());
 
-        System.out.println("Kindly Start the session,  "+list.get(index));
+        System.out.println("Kindly Start the session, >>>>>>> "+list.get(index)+"  <<<<<<");
     }
 }
